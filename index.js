@@ -35,14 +35,6 @@ io.on('connection',function(socket){
                   }
                 }
               );	
-
-		if(data.x > 5){
-			wpi.digitalWrite(configPin,1)
-		}
-		else{
-			wpi.digitalWrite(configPin,0)
->>>>>>> e164cc718a5c2022312496fecf4f794d1f4b5472
-		}
 	})
 
 	socket.on('disconnect',function(){
