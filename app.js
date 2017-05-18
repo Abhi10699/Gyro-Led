@@ -17,7 +17,7 @@ function handleMotionEvent(event) {
     	"Z":z
     }
 
-    socket.emit('deviceCoordinates',coOrdinates)
+    socket.emit('deviceCoordinates',x)
 }
 
 window.addEventListener("devicemotion", handleMotionEvent, true);

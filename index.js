@@ -8,34 +8,32 @@ var cmd = require('node-cmd');
 app.get('/',function(req,res){
 	res.sendFile(__dirname+'/index.html')
 })
-var ledON = cmd.get('sudo python ledOn.py',
-              function(data, err, stderr) {
-                if (!err) {
-		                    
-                } else {
-                 
-                  }
-                }
-              );
-var ledOff = cmd.get('sudo python ledOff.py',
-              function(data, err, stderr) {
-                if (!err) {
-		                    
-                } else {
-                 
-                  }
-                }
-              );
 io.on('connection',function(socket){
 	
 
 	socket.on('deviceCoordinates',function(data){
-		console.log("X:",data.X)
-		if(data.X > 0){
-			ledOn;			
+		console.log("X:",data)
+		if(data > 0){
+			cmd.get('sudo python ledOn.py',
+              function(data, err, stderr) {
+                if (!err) {
+		                    
+                } else {
+                 
+                  }
+                }
+              );			
 		}
 		else{
-			ledOff;
+			cmd.get('sudo python ledOff.py',
+              function(data, err, stderr) {
+                if (!err) {
+		                    
+                } else {
+                 
+                  }
+                }
+               );
               };
 })
 	socket.on('disconnect',function(){
