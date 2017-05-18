@@ -1,0 +1,16 @@
+{
+  "name": "device-motion",
+  "version": "1.0.0",
+  "description": "Getting Realtime Device Motion Data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhi Patel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "socket.io": "^2.0.1",
+    "wiring-pi": "^2.2.1"
+  }
+}
