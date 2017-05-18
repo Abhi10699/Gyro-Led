@@ -8,14 +8,7 @@ var cmd = require('node-cmd');
 app.get('/',function(req,res){
 	res.sendFile(__dirname+'/index.html')
 })
-
-io.on('connection',function(socket){
-	
-
-	socket.on('deviceCoordinates',function(data){
-		console.log("X:",data.X)
-		if(data.X > 0){
-			cmd.get('sudo python ledOn.py',
+var ledON = cmd.get('sudo python ledOn.py',
               function(data, err, stderr) {
                 if (!err) {
 		                    
@@ -23,20 +16,28 @@ io.on('connection',function(socket){
                  
                   }
                 }
-              );			
-		}
-		else{
-		cmd.get('sudo python ledOff.py',
-              		function(data, err, stderr) {
-                	if (!err) {
-                 	
+              );
+var ledOff = cmd.get('sudo python ledOff.py',
+              function(data, err, stderr) {
+                if (!err) {
+		                    
                 } else {
-                  
+                 
                   }
                 }
-              );	
-	})
+              );
+io.on('connection',function(socket){
+	
 
+	socket.on('deviceCoordinates',function(data){
+		console.log("X:",data.X)
+		if(data.X > 0){
+			ledOn;			
+		}
+		else{
+			ledOff;
+              };
+})
 	socket.on('disconnect',function(){
 		console.log("User has disconnected")
 	})
