@@ -4,7 +4,30 @@ var path = require('path');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var cmd = require('node-cmd');
+var gpio = require('rpi-gpio');
+// Setup GPIO
+
+
+gpio.setup(23,gpio.DIR_OUT,off);
+
+function Ledon(){
+	gpio.write(23,true,function(err){
+		if(err){
+			throw err;
+		}
+		console.log("Written to pin")
+	})
+}
+
+function Ledoff(){
+	gpio.write(23,false,function(err){
+		if(err){
+			throw err;
+		}
+		console.log("Written to pin")
+	})
+}
+
 app.get('/',function(req,res){
 	res.sendFile(__dirname+'/index.html')
 })
@@ -14,27 +37,12 @@ io.on('connection',function(socket){
 	socket.on('deviceCoordinates',function(data){
 		console.log("X:",data)
 		if(data > 0){
-			cmd.get('sudo python ledOn.py',
-              function(data, err, stderr) {
-                if (!err) {
-		                    
-                } else {
-                 
-                  }
-                }
-              );			
+			Ledon()
 		}
 		else{
-			cmd.get('sudo python ledOff.py',
-              function(data, err, stderr) {
-                if (!err) {
-		                    
-                } else {
-                 
-                  }
-                }
-               );
-              };
+			Ledoff()
+		}
+		
 })
 	socket.on('disconnect',function(){
 		console.log("User has disconnected")
